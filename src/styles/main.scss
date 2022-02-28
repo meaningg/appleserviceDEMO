@@ -1,0 +1,169 @@
+.app {
+  position: absolute;
+  max-width: 100%;
+  width: 100vw;
+  height: 300vh;
+  background-color: rgb(27, 27, 27);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  .authWindow {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.63);
+    transition: 0.2s;
+    &.disabled {
+      transition: 0.2s;
+      display: none;
+    }
+    .modal {
+      background-color: rgb(59, 59, 59);
+      padding: 30px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .title {
+        font-size: 16pt;
+        color: white;
+      }
+      input {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgb(70, 70, 70);
+      }
+      button {
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        cursor: pointer;
+        &:last-child {
+          margin-top: 20px;
+          background-color: rgb(70, 70, 70);
+        }
+      }
+    }
+  }
+  .header {
+    position: fixed;
+    display: flex;
+    height: 80px;
+    width: 100%;
+    color: white;
+    transition: 0.2s;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 2;
+    &.active {
+      background-color: rgb(47, 88, 86);
+      transition: 0.2s;
+    }
+    .logo {
+      padding: 10px;
+      font-size: 16pt;
+      font-weight: 500;
+    }
+    .buttons {
+      display: flex;
+      padding: 10px;
+      gap: 10px;
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-size: 14pt;
+        color: white;
+        transition: 0.2s;
+        border-radius: 5px;
+        &:hover {
+          background-color: rgb(255, 255, 255);
+          color: black;
+          border-radius: 5px;
+          transition: 0.2s;
+        }
+      }
+    }
+  }
+  .content {
+    flex-grow: 1;
+    background-color: rgb(39, 39, 39);
+    width: 100%;
+    max-width: 100%;
+    &__welcome {
+      height: 70vh;
+      width: 100%;
+      background-image: url(../../public/dlya-slidera.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    &__imageFilter {
+      height: 70vh;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.658);
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      backdrop-filter: blur(5.2px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .message {
+        width: 50%;
+        height: 40%;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .title {
+          letter-spacing: 1px;
+          color: white;
+          font-weight: 700;
+          font-size: 45pt;
+        }
+        .subText {
+          color: white;
+          letter-spacing: 1px;
+        }
+        .ticketInput {
+          margin-top: 30px;
+          display: flex;
+          gap: 20px;
+          input {
+            padding: 10px;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+          }
+          button {
+            border: none;
+            background-color: rgb(184, 80, 54);
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 10px;
+            transition: 0.2s;
+            &:hover {
+              background-color: white;
+              color: black;
+              transition: 0.2s;
+            }
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    height: 80px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+  }
+}
