@@ -57,7 +57,11 @@ function App() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
-            onClick={() => createUserWithEmailAndPassword(email, password)}
+            onClick={() =>
+              createUserWithEmailAndPassword(email, password).then(() => {
+                setauthWindow(false);
+              })
+            }
           >
             Зарегестрироваться
           </button>
