@@ -219,6 +219,13 @@
     padding-top: 30px;
     padding-bottom: 30px;
     .priceContainer {
+      .dimBG {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.92);
+        top: 0px;
+      }
       .card_hidden {
         display: none;
       }
@@ -229,6 +236,7 @@
         }
         position: absolute;
         height: auto;
+
         width: 50%;
         border-radius: 15px;
         display: flex;
@@ -328,6 +336,8 @@
     flex-direction: column;
     width: 100%;
     color: white;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
     line-height: 30px;
     h1 {
       color: white;
@@ -385,4 +395,37 @@
   height: 500px;
 
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.about {
+  height: 1000px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  .title {
+    color: white;
+    font-weight: bolder;
+    font-size: 20pt;
+    margin-bottom: 8rem;
+  }
+  .infoWrapper {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 3rem;
+    .text {
+      width: 40%;
+      font-size: 16pt;
+    }
+    .img {
+      img {
+        object-fit: cover;
+        max-height: 26rem;
+
+      }
+    }
+  }
 }
