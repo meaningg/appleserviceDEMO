@@ -9,16 +9,21 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../config";
 import { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+// import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import { NavLink } from "react-router-dom"
+
+
 function MainPage() {
     const [authWindow, setauthWindow] = useState(false);
+    const [logInWindow, setLogInWindow] = useState(false);
     // Получение состояния авторизации
     const auth = getAuth(app);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [createUserWithEmailAndPassword] =
         useCreateUserWithEmailAndPassword(auth);
+    // const [useSignInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
     const [user, loading, error] = useAuthState(auth);
     const [category, setCategory] = useState(0);
     const [NumbValue, setNumbValue] = useState(null);
@@ -65,6 +70,41 @@ function MainPage() {
                     </button>
                 </div>
             </div>
+            <div
+                className={logInWindow === true ? "authWindow" : "authWindow disabled"}
+            >
+                <div className="modal">
+                    <div className="title">Авторизация</div>
+                    <input
+                        placeholder="Email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        placeholder="Пароль"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button
+                        onClick={() =>
+                            createUserWithEmailAndPassword(email, password).then(() => {
+                                setLogInWindow(false);
+                            })
+                        }
+                    >
+                        Войти
+                    </button>
+                    <button
+                        onClick={() => {
+                            setLogInWindow(false);
+                        }}
+                    >
+                        Отмена
+                    </button>
+                </div>
+            </div>
             <div className={scrollPosition >= 200 ? "header active" : "header"}>
                 <div className="logo">iRemont55</div>
                 <div className="buttons">
@@ -93,6 +133,11 @@ function MainPage() {
                             <div className="btn">
                                 <button onClick={logout}>{user.email}</button>
                             </div>
+                            <div className="btn">
+                                <button>
+                                    <NavLink to="/sales">Акции</NavLink>
+                                </button>
+                            </div>
                         </>
                     ) : (
                         <>
@@ -102,7 +147,16 @@ function MainPage() {
                                         setauthWindow(true);
                                     }}
                                 >
-                                    Регистрация
+                                    Зарегистрироваться
+                                </button>
+                            </div>
+                            <div className="btn">
+                                <button
+                                    onClick={() => {
+                                        setLogInWindow(true);
+                                    }}
+                                >
+                                    Войти
                                 </button>
                             </div>
                         </>
@@ -116,14 +170,8 @@ function MainPage() {
                         <div className="title">
                             Сервисный центр <br /> Apple в Омске
                         </div>
-                        <div className="subText">Быстрый и качественный ремонт.</div>
+                        <div className="subText">Быстрый и качественный ремонт. <br/><br/> <a href="tel:+79045848686">+7 (904) 584-86-86 </a></div>
 
-                        <div className="ticketInput">
-                            <input type="text" value={NumbValue} placeholder="Телефон" />
-                            <button onClick={() => {
-                                setNumbValue("")
-                            }}>Заказать ремонт</button>
-                        </div>
                     </div>
                 </div>
                 <div className="content__price noselect">
@@ -211,42 +259,42 @@ function Prices({ category }) {
             <div onClick={() => {setIsOpen(!isOpen)}} className={isOpen ? "card" : "card_hidden"}>
                 <div className="priceEl">
                     <div className="name">Замена дисплея</div>
-                    <div className="price">1000₽</div>
+                    <div className="price">3990₽</div>
                 </div>
                 <hr/>
                 <div className="priceEl">
                     <div className="name">Замена корпуса</div>
-                    <div className="price">2000₽</div>
+                    <div className="price">4500₽</div>
                 </div>
                 <hr/>
                 <div className="priceEl">
                     <div className="name">Замена/ремонт камеры</div>
-                    <div className="price">3000₽</div>
+                    <div className="price">1990₽</div>
                 </div>
                 <hr/>
                 <div className="priceEl">
                     <div className="name">Замена аккумулятора</div>
-                    <div className="price">4000₽</div>
+                    <div className="price">1990₽</div>
                 </div>
                 <hr/>
                 <div className="priceEl">
                     <div className="name">Замена/ремонт микрофона</div>
-                    <div className="price">5000₽</div>
+                    <div className="price">1500₽</div>
                 </div>
                 <hr/>
                 <div className="priceEl">
                     <div className="name">Замена разговорного динамика</div>
-                    <div className="price">6000₽</div>
+                    <div className="price">1390₽</div>
                 </div>
                 <hr/>
                 <div className="priceEl">
                     <div className="name">Замена/ремонт кнопки влючения</div>
-                    <div className="price">7000₽</div>
+                    <div className="price">1990₽</div>
                 </div>
                 <hr/>
                 <div className="priceEl">
                     <div className="name">Замена/ремонт кнопки Home</div>
-                    <div className="price">8000₽</div>
+                    <div className="price">1900₽</div>
                 </div>
 
             </div>
@@ -267,7 +315,7 @@ function Prices({ category }) {
                 <div className="priceItem"><img src="https://1click.ru/upload/resized/500/500/75/upload/iblock/0bf/x0bf53f8d75e4ae3b09e38d960c0de298.png,q1636995549.pagespeed.ic.C6kgmRz69k.png" alt=""/><button onClick={() => {
                     setIsOpen(!isOpen)
                 }
-                }>iPhone 11</button></div><div className="priceItem"><img src="src/components/MainPage" alt=""/><button onClick={() => {
+                }>iPhone 11</button></div><div className="priceItem"><img src="https://htstatic.imgsmail.ru/pic_image/c2aaf8b06c58a5f807248cd2704ebb62/450/450/1909768/" alt=""/><button onClick={() => {
                 setIsOpen(!isOpen)
             }
             }>iPhone 12</button></div><div className="priceItem"><img src="https://istudio.ua/upload/iblock/307/iphone-13-midnight-512gb.png" alt=""/><button onClick={() => {
@@ -280,47 +328,49 @@ function Prices({ category }) {
     }
     if (category === 1) {
         return (
+
             <div className="priceContainer">
+                { isOpen ? <div className="dimBG"></div> : <></> }
                 <div onClick={() => {setIsOpen(!isOpen)}} className={isOpen ? "card" : "card_hidden"}>
                     <div className="priceEl">
-                        <div className="name">Замена дисплея</div>
-                        <div className="price">1000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена корпуса</div>
-                        <div className="price">2000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт камеры</div>
-                        <div className="price">3000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена аккумулятора</div>
-                        <div className="price">4000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт микрофона</div>
-                        <div className="price">5000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена разговорного динамика</div>
-                        <div className="price">6000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт кнопки влючения</div>
-                        <div className="price">7000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт кнопки Home</div>
-                        <div className="price">8000₽</div>
-                    </div>
+                    <div className="name">Замена дисплея</div>
+                    <div className="price">3990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена корпуса</div>
+                    <div className="price">4500₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт камеры</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена аккумулятора</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт микрофона</div>
+                    <div className="price">1500₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена разговорного динамика</div>
+                    <div className="price">1390₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт кнопки влючения</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт кнопки Home</div>
+                    <div className="price">1900₽</div>
+                </div>
 
                 </div>
                 <div className="priceRow">
@@ -338,47 +388,48 @@ function Prices({ category }) {
     if (category === 2) {
         return (
             <div className="priceContainer">
+                { isOpen ? <div className="dimBG"></div> : <></> }
                 <div onClick={() => {setIsOpen(!isOpen)}} className={isOpen ? "card" : "card_hidden"}>
 
                     <div className="priceEl">
-                        <div className="name">Замена дисплея</div>
-                        <div className="price">1000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена корпуса</div>
-                        <div className="price">2000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт камеры</div>
-                        <div className="price">3000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена аккумулятора</div>
-                        <div className="price">4000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт микрофона</div>
-                        <div className="price">5000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена разговорного динамика</div>
-                        <div className="price">6000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт кнопки влючения</div>
-                        <div className="price">7000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт кнопки Home</div>
-                        <div className="price">8000₽</div>
-                    </div>
+                    <div className="name">Замена дисплея</div>
+                    <div className="price">3990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена корпуса</div>
+                    <div className="price">4500₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт камеры</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена аккумулятора</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт микрофона</div>
+                    <div className="price">1500₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена разговорного динамика</div>
+                    <div className="price">1390₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт кнопки влючения</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт кнопки Home</div>
+                    <div className="price">1900₽</div>
+                </div>
 
                 </div>
                 <div className="priceRow">
@@ -396,46 +447,47 @@ function Prices({ category }) {
     if (category === 3) {
         return (
             <div className="priceContainer">
+                { isOpen ? <div className="dimBG"></div> : <></> }
                 <div onClick={() => {setIsOpen(!isOpen)}} className={isOpen ? "card" : "card_hidden"}>
                     <div className="priceEl">
-                        <div className="name">Замена дисплея</div>
-                        <div className="price">1000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена корпуса</div>
-                        <div className="price">2000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт камеры</div>
-                        <div className="price">3000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена аккумулятора</div>
-                        <div className="price">4000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт микрофона</div>
-                        <div className="price">5000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена разговорного динамика</div>
-                        <div className="price">6000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт кнопки влючения</div>
-                        <div className="price">7000₽</div>
-                    </div>
-                    <hr/>
-                    <div className="priceEl">
-                        <div className="name">Замена/ремонт кнопки Home</div>
-                        <div className="price">8000₽</div>
-                    </div>
+                    <div className="name">Замена дисплея</div>
+                    <div className="price">3990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена корпуса</div>
+                    <div className="price">4500₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт камеры</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена аккумулятора</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт микрофона</div>
+                    <div className="price">1500₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена разговорного динамика</div>
+                    <div className="price">1390₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт кнопки влючения</div>
+                    <div className="price">1990₽</div>
+                </div>
+                <hr/>
+                <div className="priceEl">
+                    <div className="name">Замена/ремонт кнопки Home</div>
+                    <div className="price">1900₽</div>
+                </div>
 
                 </div>
                 <div className="priceRow">

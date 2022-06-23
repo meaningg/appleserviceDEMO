@@ -42,12 +42,14 @@
       button {
         border: none;
         padding: 10px;
+
         border-radius: 5px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         cursor: pointer;
         &:last-child {
           margin-top: 20px;
           background-color: rgb(70, 70, 70);
+          color: white;
         }
       }
     }
@@ -343,40 +345,7 @@
       color: white;
     }
   }
-  .reviews {
-    display: flex;
-    height: auto;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    gap: 2rem;
-    .title {
-      color: white;
-      font-size: larger;
-    }
-    .last {
-      display: flex;
-      gap: 5rem;
-      .item {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        background-color: #333333;
-        padding: 1rem;
-        border-radius: 8px;
-        .title {
-
-        }
-        .text {
-          color: white;
-        }
-      }
-
-    }
-  }
+  
   .footer {
     height: auto;
     display: flex;
@@ -419,6 +388,10 @@
     .text {
       width: 40%;
       font-size: 16pt;
+    }
+    .textSales {
+      width: 80%;
+      font-size: 14pt;
     }
     .img {
       img {

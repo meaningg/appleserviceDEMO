@@ -10,15 +10,14 @@ import { app } from "../config";
 import { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import {NavLink} from "react-router-dom";
-
-function Contacts() {
+import { NavLink } from "react-router-dom"
+function Sales() {
     const [authWindow, setauthWindow] = useState(false);
     // Получение состояния авторизации
     const auth = getAuth(app);
     const [email, setEmail] = useState("");
-    const [logInWindow, setLogInWindow] = useState(false);
     const [password, setPassword] = useState("");
+    const [logInWindow, setLogInWindow] = useState(false);
     const [createUserWithEmailAndPassword] =
         useCreateUserWithEmailAndPassword(auth);
     const [user, loading, error] = useAuthState(auth);
@@ -157,22 +156,27 @@ function Contacts() {
             </div>
             <div id="main" className="content">
 
+                <div className="about">
+                    <div className="title">
+                        Акции
+                    </div>
+                    <div className="infoWrapper">
 
-                <div id="contacts" className="contacts__mapInfo">
-                    <h1>Произвести ремонт вы можете</h1>
-                    приехав по указанному ниже адресу или позвонить
-                    <br /> <br />
-                    <p>
-                        г.Омск, ул. Масленникова, 60 <br /><a href="tel:+79045848686">+7 (904) 584-86-86 </a> <br />{" "}
-                        ежедневно с 10:00 до 21:00
-                    </p>
-                </div>
-                <div className="content__contacts">
-                    <iframe
-                        src="https://yandex.ru/map-widget/v1/?um=constructor%3A3f90a5a00954893f6c74047a21f073617942a7dba6923c391616ebc05cbe9709&amp;source=constructor"
-                        width="100%" height="500" frameBorder="0"></iframe>
-                </div>
+                        <div className="textSales">Только для зарегистрированных пользователей: <br/><br/>
 
+                            Скидка 10% при первом обращении
+                            На нашем сайте вы можете уточнить стоимость типовых работ для разных моделей смартфонов, планшетов, ноутбуков производства Apple Inc. Это поможет произвести примерный расчет цены обслуживания, если вы знаете, в чем заключается поломка. Точную стоимость озвучивает мастер сервисного центра после проведения комплексной диагностики. Если вы оставите заявку на ремонт с помощью специальной онлайн-формы, сможете получить скидку в размере 10% от утвержденного прайса.
+<br/><br/>
+                            Скидка 10% за оценку нашей работы
+                            По окончании ремонта поделитесь своим мнением о сервисном центре Apple. Отзыв можно разместить в справочниках на Google, Яндекс, Фламп. После модерации сообщения пришлите нашим менеджерам ссылку на размещенный пост. Разницу в цене, равную 10% от стоимости произведенного ремонта, мы переведем на счет вашего мобильного телефона.
+<br/><br/>
+                            Скидка 10% при обслуживании двух устройств
+                            Если кроме смартфона в ремонте нуждается ноутбук или планшет, сэкономьте свое время и деньги, сразу передав технику мастерам нашего сервисного центра. Откладывать обслуживание невыгодно и даже опасно для гаджета. Под воздействием внешних факторов детали, длительное время находящиеся в нерабочем состоянии, могут окисляться, что приведет к необратимым поломкам.
+<br/><br/>
+                            Скидка 15% при повторном обращении
+                            Наш сервисный центр всегда рад постоянным клиентам и ценит оказанное доверие. Ярким подтверждением этому является приятный денежный бонус в виде скидки 15%. Чтобы его получить, сообщите мастерам сервисного центра о том, что уже обслуживались раньше. Если мы найдем ваши контакты в общей базе выполненных заказов, снизим стоимость</div>
+                    </div>
+                </div>
                 <div className="footer">
                     ©2022 iRemont55. Сервисный центр Apple техники в Омске. Все права
                     защищены.
@@ -182,4 +186,5 @@ function Contacts() {
     );
 }
 
-export default Contacts;
+
+export default Sales;
